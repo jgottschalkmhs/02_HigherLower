@@ -37,5 +37,8 @@ def intcheck(question,low = None,high = None):
 #Main routine goes here
 low_num = intcheck("What do you want the lowest number to be: ")
 high_num = intcheck("What do you want the highest number to be: ".format(low_num),low_num)
+
+
+
 guess = intcheck("What is your guess: ",low_num,high_num)
 rounds = intcheck("How many rounds do you want to play?: ",1)
