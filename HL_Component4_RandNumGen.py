@@ -8,11 +8,12 @@
 import random
 
 # Get Input
-low_num = int(input("Choose a low number"))
-high_num = int(input("Choose a high number"))
-rounds = int(input("Amount of rounds"))
+low_num = int(input("Choose a low number")) # Get lowest of range
+high_num = int(input("Choose a high number")) # Get highest of range
+rounds = int(input("Amount of rounds")) # Get how many rounds
 
 # Generate random num
-for item in range(0, rounds):
-    random_num = random.randint(low_num,high_num)
-    print(random_num)
+for item in range(0, rounds): # Loops code for amount of rounds
+    random_num = random.randint(low_num,high_num) # Generates random number
+    print(random_num) # Displays random number
+    # -v- heh
