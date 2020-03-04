@@ -53,6 +53,7 @@ rounds_played = 0
 while rounds_played < rounds:
     rounds_played += 1  # This round has started so add 1 to how many rounds are played
     guesses = 0  # Reset the amount of guessses at the start of a new round
+    correct_guess = False
     print("Round {}".format(rounds_played)) # Display what round the user is on
 
     low_num = intcheck("What do you want the lowest number to be: ")  # Gets lowest number from the user
@@ -60,7 +61,7 @@ while rounds_played < rounds:
 
     max_guesses = guess_calc(high_num,low_num)
     secret_num = random.randint(low_num, high_num)  # Generates random number
-    while guesses <= max_guesses:
+    while guesses <= max_guesses and correct_guess is False:
         guess = intcheck("What is your guess: ",low_num,high_num)  # Gets user guess between low number and high number
         guesses += 1
         # Compares users guess to the secret number and gives appropriate feedback
@@ -70,7 +71,9 @@ while rounds_played < rounds:
             print("Lower")
         elif guess == secret_num:  # if user gets it right then congratulate them
             print("Congratulations, You got it right")
-            guesses = max_guesses + 1
+            correct_guess = True
+    if correct_guess is False:
+        print("you ran out of guesses")
 
 
 
