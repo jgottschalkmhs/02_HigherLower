@@ -1,5 +1,4 @@
-# HL Component 7 - Get maximum amount of guesses. If user guesses over the limit say that they have run out of guesses.
-#                  Also say how many guesses user has left after each guess
+# HL Component 6 - Comparing the users guess to the secret number
 
 correct_guess = False
 
