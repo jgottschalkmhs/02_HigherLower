@@ -51,23 +51,37 @@ rounds = intcheck("How many rounds do you want to play?: ",1)  # Asks how many r
 rounds_played = 0
 
 while rounds_played < rounds:
+    print() # seperates each round
+
     rounds_played += 1  # This round has started so add 1 to how many rounds are played
     guesses = 0  # Reset the amount of guessses at the start of a new round
     correct_guess = False # Resets the correct guess indicator
+    already_guessed = [] # List that contains all guesses in this round
+
     print("Round {}".format(rounds_played)) # Display what round the user is on
 
     # Gets range for secret number from the user
     low_num = intcheck("What do you want the lowest number to be: ")  # Gets lowest number from the user
     high_num = intcheck("What do you want the highest number to be: ".format(low_num),low_num)  # Gets the highest number from the user
 
-    max_guesses = guess_calc(high_num,low_num)
+    max_guesses = guess_calc(high_num,low_num) # Generates the max number of guesses
     secret_num = random.randint(low_num, high_num)  # Generates random number
+    print("You have a max of {} guesses".format(max_guesses))  # Tells user their max amount of guesses
 
     # loops question until user runs out of guess or gets it right
     while guesses < max_guesses and correct_guess is False:
         guess = intcheck("What is your guess: ",low_num,high_num)  # Gets user guess between low number and high number
+
+        # Checks if user has guessed the number before if the user has it loops the question.
+        if guess in already_guessed:
+            print("You have guessed this number already, please try again")
+            print("You have {} guesses left".format(guesses_left))
+            continue
+
         guesses += 1
         guesses_left = max_guesses - guesses
+        already_guessed.append(guess) # Adds the current guess to the list of already_guessed above
+
         # Compares users guess to the secret number and gives appropriate feedback
         if guess < secret_num:  # If guess is lower than secret number tell user to go higher
             print("Higher") # Feedback
@@ -78,9 +92,9 @@ while rounds_played < rounds:
             correct_guess = True # Tells the program the user got the question right
 
         # Prints appropiate feedback based on the amount of guessses the user has left
-        if guesses_left >= 1 and correct_guess == False :
+        if guesses_left >= 1 and not correct_guess:
             print("You have {} guesses left".format(guesses_left))
-        elif correct_guess == False:
+        elif not correct_guess:
             print("you ran out of guesses")
 
 
