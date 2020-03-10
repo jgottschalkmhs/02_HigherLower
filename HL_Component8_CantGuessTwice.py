@@ -1,6 +1,6 @@
 # HL Component 8 - Makes sure that the user cant guess the same thing twice
 
-correct_guess = False
+
 
 max_guesses = int(input("Max guesses: "))
 guesses = 0
