@@ -90,7 +90,8 @@ while rounds_played < rounds:
             elif guess > secret_num:  # If guess is higher than secret number tell user to go lower
                 print("Lower") # Feedback
             elif guess == secret_num:  # if user gets it right then congratulate them
-                print("Congratulations, You got it right")
+                print("Congratulations, You got it right in {} guesses".format(guesses))
+
 
 
         # Prints appropiate feedback based on the amount of guessses the user has left
@@ -98,7 +99,7 @@ while rounds_played < rounds:
             print("You have {} guesses left".format(guesses_left))
         elif guess != secret_num :
             print("you ran out of guesses")
-            
+
 
 
 
