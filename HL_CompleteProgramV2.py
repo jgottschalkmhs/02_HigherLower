@@ -80,14 +80,17 @@ while rounds_played < rounds:
 
         guesses_left -= 1
         already_guessed.append(guess)  # Adds the current guess to the list of already_guessed above
-
+     
         if guesses_left >= 1:  # Compares users guess to the secret number and gives appropriate feedback
             if guess < secret_num:  # If guess is lower than secret number tell user to go higher
                 print("Higher")  # Feedback
             elif guess > secret_num:  # If guess is higher than secret number tell user to go lower
                 print("Lower")  # Feedback
             elif guess == secret_num:  # if user gets it right then congratulate them
-                print("Congratulations, You got it right in {} guesses".format(max_guesses - guesses_left))
+                if guesses_left == max_guesses - 1:
+                    print("Amazing!, You got it right in 1 guess")
+                else:
+                    print("Congratulations, You got it right in {} guesses".format(max_guesses - guesses_left))
                 num_won += 1
         # Prints appropiate feedback based on the amount of guesses the user has left
         if guesses_left >= 1 and guess != secret_num:
