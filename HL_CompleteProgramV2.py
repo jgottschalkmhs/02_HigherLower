@@ -80,7 +80,7 @@ while rounds_played < rounds:
 
         guesses_left -= 1
         already_guessed.append(guess)  # Adds the current guess to the list of already_guessed above
-     
+
         if guesses_left >= 1:  # Compares users guess to the secret number and gives appropriate feedback
             if guess < secret_num:  # If guess is lower than secret number tell user to go higher
                 print("Higher")  # Feedback

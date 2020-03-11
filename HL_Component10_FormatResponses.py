@@ -1,26 +1,20 @@
 # HL Component 8 - Makes sure that the user cant guess the same thing twice
-# Functions go here
 
-
-#  Main Routine
 rounds = int(input("How many rounds?: "))
 max_guesses = int(input("Max guesses: "))
 secret_num = int(input("Secret Number:"))
 
 num_won = 0
 rounds_played = 0
-already_guessed = []
+
 while rounds_played < rounds:
     rounds_played += 1 # This round has started so add 1 to how many rounds are played
     guesses_left = max_guesses
     guess = 0
     while guesses_left >= 1 and guess != secret_num:
         guess = int(input("Guess: "))
-        if guess in already_guessed:
-            print("You have guessed this number already, please try again")
-            continue
         guesses_left -= 1
-        already_guessed.append(guess)
+
         if guess < secret_num:
             print("Higher")
         elif guess > secret_num:
