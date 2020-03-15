@@ -57,25 +57,27 @@ def guess_calc(high, low):
 rounds = intcheck("How many rounds do you want to play?: ", 1)  # Asks how many rounds user wants to play
 rounds_played = 0  # Counts rounds played
 num_won = 0  # Counts rounds won
+
 while rounds_played < rounds:
     print()  # separates each round
 
     rounds_played += 1  # This round has started so add 1 to how many rounds are played
     already_guessed = []  # List that contains all guesses in this round
 
-    print("Round {}".format(rounds_played))  # Display what round the user is on
+    round_statement = hl_statement("*** Round {} ***".format(rounds_played), "*")  # Display what round the user is on
 
-    guess = ""
     # Gets range for secret number from the user
     low_num = intcheck("What do you want the lowest number to be: ")  # Gets lowest number from the user
     # Gets the highest number from the user
     high_num = intcheck("What do you want the highest number to be: ".format(low_num), low_num)
 
+    # Round setup
     maximum_guesses = guess_calc(high_num, low_num)  # Generates the max number of guesses
     secret_num = random.randint(low_num, high_num)  # Generates random number
     guesses_left = maximum_guesses  # Sets amount of guesses fo the user
     print("You have a max of {} guesses".format(guesses_left))  # Tells user their max amount of guesses
 
+    guess = ""
     # loops question until user runs out of guess or gets it right
     while guesses_left >= 1 and secret_num != guess:
         # Gets user guess between low number and high number
@@ -83,8 +85,7 @@ while rounds_played < rounds:
 
         # Checks if user has guessed the number before if the user has it loops the question.
         if guess in already_guessed:
-            print("You have guessed this number already, please try again")
-            print("You have {} guesses left".format(guesses_left))
+            guessed_statement = hl_statement("-- You Have already guessed this number | {} Guess left --".format(guesses_left), "-")
             continue
 
         guesses_left -= 1
@@ -92,18 +93,23 @@ while rounds_played < rounds:
 
         if guesses_left >= 1:  # Compares users guess to the secret number and gives appropriate feedback
             if guess < secret_num:  # If guess is lower than secret number tell user to go higher
-                print("Higher")  # Feedback
+                if guesses_left > 1:
+                    too_low = hl_statement("^^ Higher | {} guesses left ^^".format(guesses_left), "^")  # Feedback
+                else:
+                    too_low = hl_statement("^^ Higher | {} guess left ^^".format(guesses_left), "^")   # Grammatically correct feedback for only one guess
+
             elif guess > secret_num:  # If guess is higher than secret number tell user to go lower
-                print("Lower")  # Feedback
+                if guesses_left > 1:
+                    too_high = hl_statement("vv Lower | {} guesses left vv".format(guesses_left), "v")  # Feedback
+                else:
+                    too_high = hl_statement("vv Lower | {} guess left vv".format(guesses_left), "v")  # Grammatically correct feedback for only one guess
             elif guess == secret_num:  # if user gets it right then congratulate them
                 if guesses_left == maximum_guesses - 1:
-                    print("Amazing!, You got it right in 1 guess")
+                    congratulations = hl_statement("!! Amazing, you got it right in 1 guess !!", "!")
                 else:
-                    print("Congratulations, You got it right in {} guesses".format(maximum_guesses - guesses_left))
+                    congratulations = hl_statement("!! Congratulations, you got it right in {} guesses !!".format(maximum_guesses - guesses_left), "!")
                 num_won += 1
-        # Prints appropiate feedback based on the amount of guesses the user has left
-        if guesses_left >= 1 and guess != secret_num:
-            print("You have {} guesses left".format(guesses_left))
-        elif guess != secret_num:
-            print("you ran out of guesses")
-    print("Won: {} | Lost: {}".format(num_won, rounds_played - num_won))
+        # Displays the "you lose" messages
+        if guesses_left < 1 and guess != secret_num:
+            lose_statement = hl_statement("|| you ran out of guesses ||", "|")
+    round_summary = hl_statement("| Won: {} | Lost: {} |".format(num_won, rounds_played - num_won), "-")
