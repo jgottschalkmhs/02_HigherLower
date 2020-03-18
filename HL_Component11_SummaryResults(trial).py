@@ -10,12 +10,13 @@
 game_stats_guesses = [3, 5, 7, 5, 5]
 game_stats_winsloss = ["win", "loss", "win", "win", "loss"]
 print("*** Game Statistics ***")
+print("Round #  |Guesses  |Win/Lose   |")
 list_count = 0
 for item in game_stats_guesses:
-
-    print("Round {}: {} ({})   ".format(list_count + 1, game_stats_guesses[list_count],  game_stats_winsloss[list_count]))
-
-
+    if game_stats_winsloss[list_count] == "win":
+        print("Round {}  |{}        |{}        |".format(list_count + 1, game_stats_guesses[list_count],  game_stats_winsloss[list_count]))
+    if game_stats_winsloss[list_count] == "loss":
+        print("Round {}  |{}        |{}       |".format(list_count + 1, game_stats_guesses[list_count],  game_stats_winsloss[list_count]))
 
     list_count += 1
 
@@ -28,4 +29,4 @@ print()
 print("*** Summary ***" )
 print("Best Score: {}".format(best_round))
 print("Worst Score: {}".format(worst_round))
-print("Average Score: {}".format(average_round))
+print("Average Score: {:.2f}".format(average_round))

@@ -56,20 +56,24 @@ def guess_calc(high, low):
 # Main routine goes here
 rounds = intcheck("How many rounds do you want to play?: ", 1)  # Asks how many rounds user wants to play
 rounds_played = 0  # Counts rounds played
+
 num_won = 0  # Counts rounds won
+game_stats_guesses = []  # Stores the guesses in each round
+game_stats_winsloss = []  # Store whether they won or lost a round
+
+# Gets range for secret number from the user
+low_num = intcheck("What do you want the lowest number to be: ")  # Gets lowest number from the user
+# Gets the highest number from the user
+high_num = intcheck("What do you want the highest number to be: ".format(low_num), low_num)
 
 while rounds_played < rounds:
+
     print()  # separates each round
 
     rounds_played += 1  # This round has started so add 1 to how many rounds are played
     already_guessed = []  # List that contains all guesses in this round
 
     round_statement = hl_statement("*** Round {} ***".format(rounds_played), "*")  # Display what round the user is on
-
-    # Gets range for secret number from the user
-    low_num = intcheck("What do you want the lowest number to be: ")  # Gets lowest number from the user
-    # Gets the highest number from the user
-    high_num = intcheck("What do you want the highest number to be: ".format(low_num), low_num)
 
     # Round setup
     maximum_guesses = guess_calc(high_num, low_num)  # Generates the max number of guesses
@@ -88,7 +92,7 @@ while rounds_played < rounds:
             guessed_statement = hl_statement("-- You Have already guessed this number | {} Guess left --".format(guesses_left), "-")
             continue
 
-        guesses_left -= 1
+        guesses_left -= 1 # Takes one guess away from how many guesses user has left
         already_guessed.append(guess)  # Adds the current guess to the list of already_guessed above
 
         if guesses_left >= 1:  # Compares users guess to the secret number and gives appropriate feedback
@@ -108,8 +112,38 @@ while rounds_played < rounds:
                     congratulations = hl_statement("!! Amazing, you got it right in 1 guess !!", "!")
                 else:
                     congratulations = hl_statement("!! Congratulations, you got it right in {} guesses !!".format(maximum_guesses - guesses_left), "!")
+
                 num_won += 1
+                game_stats_winsloss.append("win")
         # Displays the "you lose" messages
         if guesses_left < 1 and guess != secret_num:
             lose_statement = hl_statement("|| you ran out of guesses ||", "|")
-    round_summary = hl_statement("| Won: {} | Lost: {} |".format(num_won, rounds_played - num_won), "-")
+            game_stats_winsloss.append("loss")
+
+
+    game_stats_guesses.append(maximum_guesses - guesses_left)  # Stores how many guesses this round took
+    round_summary = hl_statement("| Won: {} | Lost: {} |".format(num_won, rounds_played - num_won), "-") # Displays a round summary
+
+# After all rounds are finished show an end game summary
+
+print("*** Game Statistics ***")
+print("Round #  |Guesses  |Win/Lose   |")
+list_count = 0
+for item in game_stats_guesses:
+    if game_stats_winsloss[list_count] == "win":
+        print("Round {}  |{}        |{}        |".format(list_count + 1, game_stats_guesses[list_count],  game_stats_winsloss[list_count]))
+    if game_stats_winsloss[list_count] == "loss":
+        print("Round {}  |{}        |{}       |".format(list_count + 1, game_stats_guesses[list_count],  game_stats_winsloss[list_count]))
+
+    list_count += 1
+
+game_stats_guesses.sort()
+best_round = game_stats_guesses[0]
+worst_round = game_stats_guesses[-1]
+average_round = sum(game_stats_guesses)/len(game_stats_guesses)
+
+print()
+print("*** Summary ***" )
+print("Best Score: {}".format(best_round))
+print("Worst Score: {}".format(worst_round))
+print("Average Score: {:.2f}".format(average_round))
