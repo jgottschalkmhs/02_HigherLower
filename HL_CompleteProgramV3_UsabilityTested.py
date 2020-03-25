@@ -19,7 +19,7 @@ def intcheck(question, low=None, high=None):
     valid = False
     # Error messages
     if low is not None and high is not None:  # Error message if variables are given
-        error = "Please enter a whole number between {} and {} (Inclusive) ".format(low, high)
+        error = "Please enter a whole number between {} and {}. This does not count towards you're guesses (Inclusive) ".format(low, high)
     elif low is not None and high is None:  # Error message if only low variable is given
         error = "Please enter a whole number equal to or above {} ".format(low)
     elif low is not None and high is None:  # Error message if only high variable is given
@@ -66,7 +66,6 @@ while keepgoing == "":
     print("You will be given enough guesses to guess the number.")
     print("You will be told if you're guess is too low or too high")
     print("You can choose how many rounds you want to play.")
-    print("At the end of the game the game will give you a summary on how you did.")
     advance = input("Press <enter> to continue if you have read the introduction")  # Asks the user if they went to continue
 
     rounds = intcheck("How many rounds do you want to play?: ", 1)  # Asks how many rounds user wants to play
