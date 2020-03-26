@@ -56,17 +56,22 @@ def guess_calc(high, low):
 
 
 # Main routine goes here
+
+# Gk shifted introduction so it only displays ONCE (rather than each time the program is looped)
+
+# ****** Introduction to the game *******
+print("---------------------- Welcome to Higher Lower ----------------------")
+print("PLEASE READ!")
+print("In this higher lower game you will choose two numbers.")
+print("The computer will think of a whole number between you're chosen numbers.")
+print("You will be given enough guesses to guess the number.")
+print("You will be told if you're guess is too low or too high")
+print("You can choose how many rounds you want to play.")
+advance = input("Press <enter> to continue if you have read the introduction")  # Asks the user if they went to continue
+
+
 keepgoing = ""
 while keepgoing == "":
-    # Introduction to the game
-    print("---------------------- Welcome to Higher Lower ----------------------")
-    print("PLEASE READ!")
-    print("In this higher lower game you will choose two numbers.")
-    print("The computer will think of a whole number between you're chosen numbers.")
-    print("You will be given enough guesses to guess the number.")
-    print("You will be told if you're guess is too low or too high")
-    print("You can choose how many rounds you want to play.")
-    advance = input("Press <enter> to continue if you have read the introduction")  # Asks the user if they went to continue
 
     rounds = intcheck("How many rounds do you want to play?: ", 1)  # Asks how many rounds user wants to play
     rounds_played = 0  # Counts rounds played
